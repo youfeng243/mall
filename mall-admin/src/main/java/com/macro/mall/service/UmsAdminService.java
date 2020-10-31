@@ -3,7 +3,7 @@ package com.macro.mall.service;
 import com.macro.mall.dto.UmsAdminParam;
 import com.macro.mall.dto.UpdateAdminPasswordParam;
 import com.macro.mall.model.UmsAdmin;
-import com.macro.mall.model.UmsPermission;
+import com.macro.mall.model.UmsResource;
 import com.macro.mall.model.UmsRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,7 +47,7 @@ public interface UmsAdminService {
     /**
      * 根据用户名或昵称分页查询用户
      */
-    List<UmsAdmin> list(String name, Integer pageSize, Integer pageNum);
+    List<UmsAdmin> list(String keyword, Integer pageSize, Integer pageNum);
 
     /**
      * 修改指定用户信息
@@ -71,15 +71,9 @@ public interface UmsAdminService {
     List<UmsRole> getRoleList(Long adminId);
 
     /**
-     * 修改用户的+-权限
+     * 获取指定用户的可访问资源
      */
-    @Transactional
-    int updatePermission(Long adminId, List<Long> permissionIds);
-
-    /**
-     * 获取用户所有权限（包括角色权限和+-权限）
-     */
-    List<UmsPermission> getPermissionList(Long adminId);
+    List<UmsResource> getResourceList(Long adminId);
 
     /**
      * 修改密码
